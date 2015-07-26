@@ -1,8 +1,10 @@
-##Proyect Write up
+#Proyect Write up
 
 I basically use random forest obtaining excellent prediction power, 100% acuraccy in the testing set. One of the challenges was to overcome the issues with the performance of random forest in R. Usually i program in Python and i was surprised that the performance of random forest in R is patetic.
 
-The seleccion of features was based on the features not missing in the testing set, it deosn't make any sense to use features missing in the testing set. isn't? 
+The seleccion of features was based on the features not missing in the testing set, it doesn't make any sense to use features missing in the testing set.  
+
+The accuracy in the testing set is  95% so expect to obtain excellent result in the out of sample which I HAD.
 
 
 ```{r}
