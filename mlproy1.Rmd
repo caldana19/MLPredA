@@ -1,0 +1,28 @@
+##Proyect Write up
+
+I basically use random forest obtaining excellent prediction power, 100% acuraccy in the testing set. One of the challenges was to overcome the issues with the performance of random forest in R. Usually i program in Python and i was surprised that the performance of random forest in R is patetic.
+
+The seleccion of features was based on the features not missing in the testing set, it deosn't make any sense to use features missing in the testing set. isn't? 
+
+
+```{r}
+library(caret)
+library(foreach)
+
+data <-  read.csv("pml-training.csv")  
+set.seed(998)
+inTrain <- createDataPartition(y=data$classe, p=0.7, list=FALSE)
+training <- data[inTrain,]
+testing <- data[-inTrain,]
+```
+
+```{r}
+modFit <- train(classe~roll_belt+pitch_belt+yaw_belt+total_accel_belt+gyros_belt_x+gyros_belt_y+accel_belt_x+accel_belt_y+accel_belt_z+magnet_belt_x+magnet_belt_y+magnet_belt_z+roll_arm+pitch_arm+yaw_arm+total_accel_arm+gyros_arm_x+gyros_arm_y+gyros_arm_z+accel_arm_x+accel_arm_y+accel_arm_z+magnet_arm_x+magnet_arm_y+magnet_arm_z+roll_dumbbell+pitch_dumbbell+yaw_dumbbell, 
+                method="parRF", data=training, ntree=10, importance=TRUE)
+
+```
+
+```{r}
+pred <- predict(modFit, testing)
+confusionMatrix(pred, testing$classe)
+```
